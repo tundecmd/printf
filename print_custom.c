@@ -23,17 +23,17 @@ int print_bigS(va_list l, flags_t *f)
 	for (i = 0; s[i]; i++)
 	{
 		if (s[i] > 0 && (s[i] < 32 || s[i] >= 127))
-															{
-																_puts("\\x");
-																count += 2;
-																res = convert(s[i], 16, 0);
-																													if (!res[1])
-																														count += _putchar('0');
-																													count += _puts(res);
-																												}
-															else
-																count += _putchar(s[i]);
-														}
+		{
+			_puts("\\x");
+			count += 2;
+			res = convert(s[i], 16, 0);
+			if (!res[1])
+				count += _putchar('0');
+			count += _puts(res);
+		}
+		else
+			count += _putchar(s[i]);
+	}
 	return (count);
 }
 
@@ -76,20 +76,20 @@ int print_rot13(va_list l, flags_t *f)
 	char ROT13[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 	char *s = va_arg(l, char *);
 
-	(void)f; 
-	for (j = 0; s[j]; j++)  
-	{	
-															if (s[j] < 'A' || (s[j] > 'Z' && s[j] < 'a') || s[j] > 'z')
-															_putchar(s[j]);
-		 													else
-															{
-																for (i = 0; i <= 52; i++)
-																{
-																														if (s[j] == rot13[i])
-																															_putchar(ROT13[i]);
-																													}
-															}
-														}
+	(void)f;
+	for (j = 0; s[j]; j++)
+	{
+		if (s[j] < 'A' || (s[j] > 'Z' && s[j] < 'a') || s[j] > 'z')
+			_putchar(s[j]);
+		else
+		{
+			for (i = 0; i <= 52; i++)
+			{
+				if (s[j] == rot13[i])
+					_putchar(ROT13[i]);
+			}
+		}
+	}
 
 	return (j);
 }
